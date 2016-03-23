@@ -40,10 +40,10 @@ class Dropout {
 		}
 		
 		// Compute Tanimoto
-		$intersection = count( array_unique( array_intersect( $bow_a, $bow_b ) ) );
-		$union        = count( array_unique( array_merge( $bow_a, $bow_b ) ) );
+		$intersection = array_unique( array_intersect( $bow_a, $bow_b ) );
+		$union        = array_unique( array_merge( $bow_a, $bow_b ) );
 		
-		return $intersection / $union;
+		return count( $intersection ) / count( $union );
 	}
 	
 	/**
