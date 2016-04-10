@@ -12,5 +12,5 @@ Similarities are stored in `wp_postmeta` for each post; as a result WP stores a 
 
 Two hooks are used:
 
-- `save_post`: when a post is saved, it gets compared to the latest posts and results are saved in `wp_postmeta` as an array.
+- `save_post`: when a post is saved, it gets compared to the latest posts and results are saved (for each post) in `wp_postmeta` as an array.
 - `the_content`: when a post is showed in page, the recommended posts are extracted from the array in `wp_postmeta`.
