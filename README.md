@@ -4,7 +4,11 @@ Simple recommendation plugin for WordPress. Used as toy example for a talk about
 
 # How does it work?
 
-The plugin computes similarity between two texts via [Jaccard/Tanimoto coefficient](https://en.wikipedia.org/wiki/Jaccard_index). Similarities are stored in `wp_postmeta` for each post; as a result WP stores a similarity graph that can be queried quickly to output recommendations (which is, the most similar posts to the one currently in page).
+The plugin computes similarity between two texts via [Jaccard/Tanimoto coefficient](https://en.wikipedia.org/wiki/Jaccard_index).
+
+![Tanimoto](http://pieroit.github.io/machine-learning-open-course/img/tanimoto_php.png)
+
+Similarities are stored in `wp_postmeta` for each post; as a result WP stores a similarity graph that can be queried quickly to output recommendations (which is, the most similar posts to the one currently in page).
 
 Two hooks are used:
 
