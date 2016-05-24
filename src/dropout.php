@@ -35,7 +35,8 @@ function dropout_update_recommendations( $post_id ) {
 	$latest_posts = wp_get_recent_posts(
 		array(
 			'numberposts' => 10,
-			'post_type'   => array( 'post', 'page' )
+			'post_type'   => array( 'post', 'page' ),
+			'post_satus'  => 'publish'
 		)
 	);
 	$similarities = array();
