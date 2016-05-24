@@ -75,7 +75,9 @@ function dropout_get_recommendations( $content ) {
 	$html = '<h3>See also</h3><ul>';
 	foreach( $recommendations as $recom_id => $similarity ) {
 		$recom_post = get_post( $recom_id );
-		$html .= '<li><a href="' . get_permalink($recom_post->ID) . '">' . $recom_post->post_title . '</a> (' . $similarity .')</li>';
+		if($recom_post){
+			$html .= '<li><a href="' . get_permalink($recom_post->ID) . '">' . $recom_post->post_title . '</a> (' . $similarity .')</li>';
+		}
 	}
 	$html .= '</ul>';
 	
