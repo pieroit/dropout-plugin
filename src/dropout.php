@@ -34,7 +34,7 @@ function dropout_update_recommendations( $post_id ) {
 	// Take latest 50 posts
 	$latest_posts = wp_get_recent_posts(
 		array(
-			'numberposts' => 10,
+			'numberposts' => 50,
 			'post_type'   => array( 'post', 'page' ),
 			'post_satus'  => 'publish'
 		)
@@ -62,26 +62,30 @@ function dropout_update_recommendations( $post_id ) {
 add_action( 'save_post', 'dropout_update_recommendations' );
 
 /**
- * Add recommendations to every post
+ * Get recommendations when a post is shown
  */
 function dropout_get_recommendations( $content ) {
 	
+        // Get similarities with other posts
 	$recommendations = get_post_meta( get_the_ID(), 'dropout_recommendations', true );
 	if( empty( $recommendations ) ) {
 		return $content;
 	}
 	
 	arsort( $recommendations );                                 // Sort by similarity
-
+	$recommendations = array_slice($recommendations, 0, 5)      // Take n most similar
+	
+	// Loop over recommendations and print link, title, similarity. TODO: this should be templatable
 	$html = '<h3>See also</h3><ul>';
 	foreach( $recommendations as $recom_id => $similarity ) {
 		$recom_post = get_post( $recom_id );
-		if($recom_post){
-			$html .= '<li><a href="' . get_permalink($recom_post->ID) . '">' . $recom_post->post_title . '</a> (' . $similarity .')</li>';
+		if($recom_post && ($recom_post->post_status=='publish') ){
+			$html .= '<li><a href="' . get_permalink($recom_post->ID) . '">' . $recom_post->post_title . '</a> (' . round($similarity, 5) .')</li>';
 		}
 	}
 	$html .= '</ul>';
 	
+        // Return content with added recommendations
 	return $content . $html;
 }
 add_filter( 'the_content', 'dropout_get_recommendations' );
