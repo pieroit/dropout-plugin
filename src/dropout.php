@@ -72,8 +72,8 @@ function dropout_get_recommendations( $content ) {
 		return $content;
 	}
 	
-	arsort( $recommendations );                                 // Sort by similarity
-	$recommendations = array_slice($recommendations, 0, 5);     // Take n most similar
+	arsort( $recommendations );                                    // Sort by similarity
+	$recommendations = array_slice($recommendations, 0, 5, true);  // Take n most similar
 	
 	// Loop over recommendations and print link, title, similarity. TODO: this should be templatable
 	$html = '<h3>See also</h3><ul>';
